@@ -1,0 +1,24 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/percentage_frame_layout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="16dp">
+
+    <TextView
+        android:id="@+id/percentage_text_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="56sp"
+        android:textColor="@android:color/black"
+        android:textStyle="bold"
+        android:layout_gravity="center_horizontal"/>
+
+    <com.example.dailyleveling.MainScreen.PercentageView
+        android:id="@+id/percentage_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+      />
+
+</FrameLayout>
