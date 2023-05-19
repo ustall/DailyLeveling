@@ -1,0 +1,59 @@
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:id="@android:id/background">
+        <shape
+
+            android:shape="ring"
+            android:thickness="15dp"
+            android:useLevel="false">
+            <solid android:color="@color/gray" />
+        </shape>
+    </item>
+
+<!--    <item>-->
+<!--        <rotate-->
+<!--            android:fromDegrees="90"-->
+<!--            android:toDegrees="90">-->
+
+<!--            <shape-->
+<!--                android:innerRadiusRatio="3"-->
+<!--                android:shape="ring"-->
+<!--                android:thicknessRatio="15"-->
+<!--                android:useLevel="false">-->
+
+<!--                <gradient-->
+<!--                    android:startColor="@color/purple_200"-->
+<!--                    android:endColor="@color/purple_700"-->
+<!--                    android:centerColor="@color/purple_500"-->
+<!--                    android:type="sweep" />-->
+
+<!--                <size-->
+<!--                    android:height="1000dp"-->
+<!--                    android:width="1000dp" />-->
+
+<!--                <stroke-->
+<!--                    android:width="3dp"-->
+<!--                    android:color="@color/black" />-->
+<!--            </shape>-->
+<!--        </rotate>-->
+<!--    </item>-->
+    <item android:id="@android:id/progress">
+        <rotate
+            android:fromDegrees="90"
+            android:toDegrees="90">
+        <shape
+            android:shape="ring"
+            android:thickness="15dp"
+            android:useLevel="true">
+            <gradient
+                android:startColor="@color/purple_200"
+                android:endColor="@color/purple_700"
+                android:centerColor="@color/purple_500"
+                android:type="sweep" />
+        </shape>
+        </rotate>
+    </item>
+
+
+
+</layer-list>

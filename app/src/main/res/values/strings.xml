@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Daily leveling</string>
+    <string name="per_fi_txt">100%</string>
+    <string name="task_title">Task Title</string>
 </resources>
