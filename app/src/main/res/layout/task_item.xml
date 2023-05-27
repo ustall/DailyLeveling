@@ -16,8 +16,8 @@
 
         <ImageView
             android:id="@+id/check_icon"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:baselineAlignBottom="false"
             android:src="@drawable/baseline_unchecked_24"
             app:tint="?attr/colorPrimary" /> />
@@ -30,7 +30,8 @@
             android:layout_marginStart="16dp"
             android:layout_weight="1"
             android:text="@string/task_title"
-            android:textSize="27sp" />
+            android:textSize="23sp"
+            android:typeface="normal" />
 
     </LinearLayout>
 

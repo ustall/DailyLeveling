@@ -13,8 +13,8 @@
 
         <ImageView
             android:id="@+id/menu_b"
-            android:layout_width="42dp"
-            android:layout_height="42dp"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
             android:layout_gravity="start|center_vertical"
             android:layout_marginHorizontal="8dp"
             android:elevation="0dp"
@@ -29,12 +29,13 @@
             android:layout_weight="1"
             android:text="1 LVL"
             android:textAlignment="center"
-            android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textSize="20sp" />
 
         <ImageView
             android:id="@+id/acc_b"
-            android:layout_width="42dp"
-            android:layout_height="42dp"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
             android:layout_gravity="end|center_vertical"
             android:layout_marginHorizontal="8dp"
             android:elevation="0dp"

@@ -18,4 +18,8 @@ class TaskRepository(private val taskDao: TaskDao) {
         taskDao.updateTask(task)
     }
 
+    suspend fun getTaskById(taskId: Long): Task? {
+        return taskDao.getTaskById(taskId)
+    }
+
 }

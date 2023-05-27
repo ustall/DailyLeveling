@@ -27,5 +27,25 @@ class TaskItemVM(private val taskRepository: TaskRepository) : ViewModel() {
     fun updateTask(task: Task) = viewModelScope.launch(Dispatchers.IO) {
         taskRepository.updateTask(task)
     }
+    fun updateTaskStatus(taskId: Long, status: Boolean) {
+        viewModelScope.launch(Dispatchers.IO) {
+            val task = taskRepository.getTaskById(taskId)
+            if (task != null) {
+                val updatedTask = Task(
+                    id = task.id,
+                    taskText = task.taskText,
+                    status = status,
+                    priority = task.priority,
+                    createdAt = task.createdAt
+                )
+                taskRepository.updateTask(updatedTask)
+            }
+        }
+    }
+
+
+
+
+
 
 }

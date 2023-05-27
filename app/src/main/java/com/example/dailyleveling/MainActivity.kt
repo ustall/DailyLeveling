@@ -24,6 +24,7 @@ class MainActivity : AppCompatActivity() {
 
         initializeViewModel()
         initializeRecyclerView()
+
         observeTasks()
     }
 
@@ -38,7 +39,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun initializeRecyclerView() {
         val recyclerView: RecyclerView = findViewById(R.id.task_list_recycler_view)
-        taskAdapter = TaskAdapter()
+        taskAdapter = TaskAdapter(taskItemVM)
         recyclerView.adapter = taskAdapter
         recyclerView.layoutManager = LinearLayoutManager(this)
     } //RV
@@ -46,7 +47,7 @@ class MainActivity : AppCompatActivity() {
     private fun observeTasks() {
         taskItemVM.allTasks.observe(this, Observer { tasks ->
             tasks?.let {
-                if (tasks.isNullOrEmpty()) insertExampleTask()
+                if (tasks.isEmpty())insertExampleTask()
                 taskAdapter.submitList(it)
             }
         })
@@ -56,9 +57,8 @@ class MainActivity : AppCompatActivity() {
         val task = Task(
             taskText = "Пример задачи",
             status = false,
-            priority = 1,
             createdAt = "00"
         )
-        taskItemVM.insertTask(task)
+        repeat(10){taskItemVM.insertTask(task)}
     }//TaskSample
 }
