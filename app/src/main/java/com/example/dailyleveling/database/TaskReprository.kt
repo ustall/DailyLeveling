@@ -6,22 +6,8 @@ class TaskRepository(private val taskDao: TaskDao) {
 
     val allTasks: LiveData<List<Task>> = taskDao.getAllTasksData()
 
-    fun getAllTasks(): List<Task> {
-        return taskDao.getAllTasks()
-    }
-
-    fun insertTask(task: Task) {
-        taskDao.insertTask(task)
-    }
-
-    //my methods
-
-    fun getAllNotes(): LiveData<List<Task>> {
-        return taskDao.getAllTasksData()
-    }
-
-    fun getNoteById(id: Int): Task {
-        return taskDao.getTaskById(id)
+    suspend fun insertTask(note: Task) {
+        taskDao.insertTask(note)
     }
 
     suspend fun deleteTask(task: Task) {
@@ -32,12 +18,4 @@ class TaskRepository(private val taskDao: TaskDao) {
         taskDao.updateTask(task)
     }
 
-    //sub_main tasks
-    fun getSubtasks(parentId: Long): List<Task> {
-        return taskDao.getSubtasks(parentId)
-    }
-
-    fun getParentTask(parentId: Long): Task? {
-        return taskDao.getParentTask(parentId)
-    }
 }
