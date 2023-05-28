@@ -1,7 +1,6 @@
 package com.example.dailyleveling.MainScreen
 
 import android.content.Context
-import android.graphics.Color
 import android.graphics.Paint
 import android.util.TypedValue
 import android.view.LayoutInflater
@@ -16,25 +15,17 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.dailyleveling.R
 import com.example.dailyleveling.database.Task
 
-
 class TaskAdapter(private val taskItemVM: TaskItemVM) : ListAdapter<Task, TaskAdapter.TaskViewHolder>(TaskDiffCallback()) {
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TaskViewHolder {
         val itemView = LayoutInflater.from(parent.context).inflate(R.layout.task_item, parent, false)
         return TaskViewHolder(itemView, taskItemVM)
     }
-
 
     override fun onBindViewHolder(holder: TaskViewHolder, position: Int) {
         val task = getItem(position)
         holder.bind(task)
     }
 
-    fun getColorFromTheme(context: Context, attrId: Int): Int {
-    val typedValue = TypedValue()
-    val resolved = context.theme.resolveAttribute(attrId, typedValue, true)
-    return if (resolved) typedValue.data else 0
-}//Получение цвета в зависимости от темы
     inner class TaskViewHolder(itemView: View, private val taskItemVM: TaskItemVM) : RecyclerView.ViewHolder(itemView) {
         private val taskTitleTextView: TextView = itemView.findViewById(R.id.task_title)
         private val checkIcon: ImageView = itemView.findViewById(R.id.check_icon)
@@ -63,11 +54,10 @@ class TaskAdapter(private val taskItemVM: TaskItemVM) : ListAdapter<Task, TaskAd
                 // Задача не выполнена
                 checkIcon.setImageResource(R.drawable.baseline_unchecked_24)
                 taskTitleTextView.paintFlags = taskTitleTextView.paintFlags and Paint.STRIKE_THRU_TEXT_FLAG.inv()
+                checkIcon.setColorFilter(ContextCompat.getColor(itemView.context, R.color.purple_200))
             }
         }
     }
-
-
 
     class TaskDiffCallback : DiffUtil.ItemCallback<Task>() {
         override fun areItemsTheSame(oldItem: Task, newItem: Task): Boolean {
