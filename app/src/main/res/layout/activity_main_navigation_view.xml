@@ -27,7 +27,8 @@
                 android:scaleType="center"
                 android:src="@drawable/baseline_menu_24"
                 app:tint="?attr/colorPrimary"
-                android:contentDescription="@string/menu_b_description" />
+                android:contentDescription="@string/menu_b_description"
+                android:foreground="?attr/selectableItemBackground"/>
 
             <TextView
                 android:id="@+id/user_lvl"
@@ -51,7 +52,8 @@
                 android:scaleType="center"
                 android:src="@drawable/baseline_person_24"
                 app:tint="?attr/colorPrimary"
-                android:contentDescription="@string/account_button_description" />
+                android:contentDescription="@string/account_button_description"
+                android:foreground="?attr/selectableItemBackground"/>
 
         </LinearLayout>
         <View

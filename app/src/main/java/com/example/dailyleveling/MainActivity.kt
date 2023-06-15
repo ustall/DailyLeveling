@@ -38,6 +38,7 @@ class MainActivity : AppCompatActivity() {
     }
     private fun initializeViewModel() {
         val database = Room.databaseBuilder(applicationContext, AppDatabase::class.java, "task_database")
+            .fallbackToDestructiveMigration()
             .build()
         val taskDao = database.taskDao()
         val taskRepository = TaskRepository(taskDao)

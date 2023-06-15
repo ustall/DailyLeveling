@@ -47,7 +47,6 @@ class TaskAdapter(private val taskItemVM: TaskItemVM) : ListAdapter<Task, TaskAd
                 }
             }//короткое
             itemView.setOnLongClickListener {
-//                animateBackground()
                 Toast.makeText(itemView.context, "Long Tap", Toast.LENGTH_SHORT).show()
                 true
             }//длинное
@@ -57,12 +56,12 @@ class TaskAdapter(private val taskItemVM: TaskItemVM) : ListAdapter<Task, TaskAd
             val context = itemView.context
             val uncheckedMarkColor = context.theme.obtainStyledAttributes(R.style.Theme_DailyLeveling, intArrayOf(R.attr.colorUncheckedMark)).getColor(0, 0)
             val onSurfaceColor = context.theme.obtainStyledAttributes(R.style.Theme_DailyLeveling, intArrayOf(com.google.android.material.R.attr.colorOnSurface)).getColor(0, 0)
-            val PrimaryMarkColor = context.theme.obtainStyledAttributes(R.style.Theme_DailyLeveling, intArrayOf(com.google.android.material.R.attr.colorPrimary)).getColor(0, 0)
+            val primaryMarkColor = context.theme.obtainStyledAttributes(R.style.Theme_DailyLeveling, intArrayOf(com.google.android.material.R.attr.colorPrimary)).getColor(0, 0)
             if (task.status) {
                 // Задача выполнена
                 checkIcon.setImageResource(R.drawable.baseline_checked_24)
-                val animator = ValueAnimator.ofArgb(PrimaryMarkColor,uncheckedMarkColor)
-                animator.duration = 700 // 300 milliseconds
+                val animator = ValueAnimator.ofArgb(primaryMarkColor,uncheckedMarkColor)
+                animator.duration = 1200
                 animator.addUpdateListener { valueAnimator ->
                     val color = valueAnimator.animatedValue as Int
                     checkIcon.setColorFilter(color)
@@ -74,7 +73,7 @@ class TaskAdapter(private val taskItemVM: TaskItemVM) : ListAdapter<Task, TaskAd
                 // Задача не выполнена
                 checkIcon.setImageResource(R.drawable.baseline_unchecked_24)
                 taskTitleTextView.paintFlags = 0
-                checkIcon.setColorFilter(uncheckedMarkColor)
+                checkIcon.setColorFilter(onSurfaceColor)
                 taskTitleTextView.setTextColor(onSurfaceColor)
             }
         }

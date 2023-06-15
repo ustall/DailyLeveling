@@ -38,7 +38,7 @@
                 android:layout_gravity="center_vertical"
                 android:baselineAlignBottom="false"
                 android:src="@drawable/baseline_unchecked_24"
-                app:tint="?attr/colorUncheckedMark"/>
+                app:tint="?attr/colorOnSurface"/>
 
         </LinearLayout>
         <View
