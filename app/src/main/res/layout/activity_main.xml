@@ -13,7 +13,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-
     <include
         android:id="@+id/progress_bar"
         layout="@layout/activity_main_percentage_view"
@@ -32,6 +31,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/progress_bar" />
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -11,7 +11,12 @@ data class Task(
     val taskText: String,
     val status: Boolean,
     val createdAt: String,
+    val updatedAt: String? = null,
     val priority: Int? = null,
+    val type: String? = null,
+    val dueDate: String? = null,
+    val assignedTo: String? = null,
+    val completedAt: String? = null,
     val notes: String? = null,
     val parentId: Long? = null
 ): Serializable

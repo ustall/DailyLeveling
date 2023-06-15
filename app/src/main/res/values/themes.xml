@@ -12,5 +12,13 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
+        <item name="colorCardBorder">@color/gray_50</item>
+
+        <item name="colorDiagramBackground">@color/gray_200</item>
+        <item name="colorDiagramStart">@color/purple_200</item>
+        <item name="colorDiagramCentre">@color/purple_500</item>
+        <item name="colorDiagramEnd">@color/purple_700</item>
+
+        <item name="colorUncheckedMark">@color/gray_500</item>
     </style>
 </resources>

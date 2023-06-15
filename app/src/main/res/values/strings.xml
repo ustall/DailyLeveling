@@ -2,4 +2,14 @@
     <string name="app_name">Daily leveling</string>
     <string name="per_fi_txt">100%</string>
     <string name="task_title">Task Title</string>
+    <string name="priority_prompt">Select priority</string>
+    <string name="task_text_hint">Enter task text here</string>
+    <string name="task_text_label">Task text:</string>
+    <string name="priority_label">Priority:</string>
+    <string name="add_task_button_text">Add task</string>
+    <string name="title_task">New task</string>
+    <string name="button_text">Button Text</string>
+    <string name="user_lvl_template">12 LVL</string>
+    <string name="menu_b_description">Menu</string>
+    <string name="account_button_description">Account</string>
 </resources>

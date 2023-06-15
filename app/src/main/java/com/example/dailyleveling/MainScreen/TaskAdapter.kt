@@ -1,5 +1,6 @@
 package com.example.dailyleveling.MainScreen
 
+import android.animation.ValueAnimator
 import android.content.Context
 import android.graphics.Paint
 import android.util.TypedValue
@@ -8,17 +9,23 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
+import androidx.cardview.widget.CardView
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.dailyleveling.R
 import com.example.dailyleveling.database.Task
 
 class TaskAdapter(private val taskItemVM: TaskItemVM) : ListAdapter<Task, TaskAdapter.TaskViewHolder>(TaskDiffCallback()) {
+
+    private lateinit var itemTouchHelper: ItemTouchHelper
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TaskViewHolder {
         val itemView = LayoutInflater.from(parent.context).inflate(R.layout.task_item, parent, false)
-        return TaskViewHolder(itemView, taskItemVM)
+        return TaskViewHolder(itemView)
     }
 
     override fun onBindViewHolder(holder: TaskViewHolder, position: Int) {
@@ -26,38 +33,53 @@ class TaskAdapter(private val taskItemVM: TaskItemVM) : ListAdapter<Task, TaskAd
         holder.bind(task)
     }
 
-    inner class TaskViewHolder(itemView: View, private val taskItemVM: TaskItemVM) : RecyclerView.ViewHolder(itemView) {
+    inner class TaskViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val taskTitleTextView: TextView = itemView.findViewById(R.id.task_title)
         private val checkIcon: ImageView = itemView.findViewById(R.id.check_icon)
+        private  val cardView: CardView = itemView.findViewById(R.id.task_item_view)
+
         init {
-            checkIcon.setOnClickListener {
+            itemView.setOnClickListener {
                 val position = adapterPosition
                 if (position != RecyclerView.NO_POSITION) {
                     val task = getItem(position)
-                    if (task.status) {
-                        taskItemVM.updateTaskStatus(task.id, false)
-                    } else {
-                        taskItemVM.updateTaskStatus(task.id, true)
-                    }
+                    taskItemVM.updateTaskStatus(task.id, !task.status)
                 }
-            }
+            }//короткое
+            itemView.setOnLongClickListener {
+//                animateBackground()
+                Toast.makeText(itemView.context, "Long Tap", Toast.LENGTH_SHORT).show()
+                true
+            }//длинное
         }
-
         fun bind(task: Task) {
             taskTitleTextView.text = task.taskText
+            val context = itemView.context
+            val uncheckedMarkColor = context.theme.obtainStyledAttributes(R.style.Theme_DailyLeveling, intArrayOf(R.attr.colorUncheckedMark)).getColor(0, 0)
+            val onSurfaceColor = context.theme.obtainStyledAttributes(R.style.Theme_DailyLeveling, intArrayOf(com.google.android.material.R.attr.colorOnSurface)).getColor(0, 0)
+            val PrimaryMarkColor = context.theme.obtainStyledAttributes(R.style.Theme_DailyLeveling, intArrayOf(com.google.android.material.R.attr.colorPrimary)).getColor(0, 0)
             if (task.status) {
                 // Задача выполнена
                 checkIcon.setImageResource(R.drawable.baseline_checked_24)
-                checkIcon.setColorFilter(ContextCompat.getColor(itemView.context, android.R.color.darker_gray))
-                taskTitleTextView.paintFlags = taskTitleTextView.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
+                val animator = ValueAnimator.ofArgb(PrimaryMarkColor,uncheckedMarkColor)
+                animator.duration = 700 // 300 milliseconds
+                animator.addUpdateListener { valueAnimator ->
+                    val color = valueAnimator.animatedValue as Int
+                    checkIcon.setColorFilter(color)
+                    taskTitleTextView.setTextColor(color)
+                }
+                animator.start()
+                taskTitleTextView.paintFlags = Paint.STRIKE_THRU_TEXT_FLAG
             } else {
                 // Задача не выполнена
                 checkIcon.setImageResource(R.drawable.baseline_unchecked_24)
-                taskTitleTextView.paintFlags = taskTitleTextView.paintFlags and Paint.STRIKE_THRU_TEXT_FLAG.inv()
-                checkIcon.setColorFilter(ContextCompat.getColor(itemView.context, R.color.purple_200))
+                taskTitleTextView.paintFlags = 0
+                checkIcon.setColorFilter(uncheckedMarkColor)
+                taskTitleTextView.setTextColor(onSurfaceColor)
             }
         }
     }
+
 
     class TaskDiffCallback : DiffUtil.ItemCallback<Task>() {
         override fun areItemsTheSame(oldItem: Task, newItem: Task): Boolean {
@@ -69,3 +91,4 @@ class TaskAdapter(private val taskItemVM: TaskItemVM) : ListAdapter<Task, TaskAd
         }
     }
 }
+

@@ -51,7 +51,7 @@ class MainActivity : AppCompatActivity() {
     } //RV A
     private fun initializeProgressAdapter() {
         val progressBar: ProgressBar = findViewById(R.id.progressBar)
-        val textView: TextView = findViewById(R.id.pcText)
+        val textView: TextView = findViewById(R.id.percentage_text)
         progressAdapter = ProgressAdapter(progressBar, textView)
     }
     private fun observeTasks() {
@@ -60,7 +60,6 @@ class MainActivity : AppCompatActivity() {
                 tasks.takeIf { it.isNotEmpty() } ?: listOf(insertExampleTask())
                 val totalTasks = it.size
                 val completedTasks = it.count { task -> task.status }
-
                 val progress = calculateProgress(totalTasks, completedTasks)
                 updateProgressAdapter(progress)
                 taskAdapter.submitList(it)

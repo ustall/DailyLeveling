@@ -18,12 +18,12 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/pcText"
+     <TextView
+        android:id="@+id/percentage_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/per_fi_txt"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         android:textSize="35sp"
         app:layout_constraintBottom_toBottomOf="@+id/progressBar"
         app:layout_constraintEnd_toEndOf="@+id/progressBar"

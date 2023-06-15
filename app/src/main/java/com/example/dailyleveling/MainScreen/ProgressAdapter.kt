@@ -1,19 +1,35 @@
 package com.example.dailyleveling.MainScreen
 
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.animation.ObjectAnimator
+import android.view.animation.AccelerateDecelerateInterpolator
 import android.widget.ProgressBar
 import android.widget.TextView
-import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.RecyclerView
-import com.example.dailyleveling.R
-import com.example.dailyleveling.database.Task
 
 class ProgressAdapter(private val progressBar: ProgressBar, private val textView: TextView) {
 
     fun setProgress(progress: Int) {
-        progressBar.progress = progress
-        textView.text = "$progress%"
+        if (progress in 0..100) {
+            animateProgress(progress)
+            textView.text = buildString {
+            append(progress)
+            append("%")
+        }
+        } else {
+            throw IllegalArgumentException("Progress value must be between 0 and 100.")
+        }
+    }
+    private fun animateProgress(progress: Int) {
+        val currentProgress = progressBar.progress
+        val animator = ObjectAnimator.ofInt(progressBar, "progress", currentProgress, progress)
+        animator.apply {
+            duration = ANIMATION_DURATION
+            interpolator = ANIMATION_INTERPOLATOR
+            target = progressBar
+            start()
+        }
+    }
+     companion object {
+        private const val ANIMATION_DURATION = 400L
+        private val ANIMATION_INTERPOLATOR = AccelerateDecelerateInterpolator()
     }
 }
