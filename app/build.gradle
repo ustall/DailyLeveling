@@ -7,12 +7,12 @@ plugins {
 
 android {
     namespace 'com.example.dailyleveling'
-    compileSdk 33
+    compileSdk 34
 
     defaultConfig {
         applicationId "com.example.dailyleveling"
         minSdk 24
-        targetSdk 33
+        targetSdk 34
         versionCode 1
         versionName "1.0"
 
@@ -50,11 +50,11 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
 
 //db
-    implementation("androidx.room:room-runtime:2.5.1")
-    annotationProcessor("androidx.room:room-compiler:2.5.1")
-    implementation 'androidx.room:room-common:2.5.1'
-    implementation 'androidx.room:room-ktx:2.5.1'
-    kapt("androidx.room:room-compiler:2.5.1")
+    implementation("androidx.room:room-runtime:2.5.2")
+    annotationProcessor("androidx.room:room-compiler:2.5.2")
+    implementation 'androidx.room:room-common:2.5.2'
+    implementation 'androidx.room:room-ktx:2.5.2'
+    kapt("androidx.room:room-compiler:2.5.2")
 
     //vm
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.1'

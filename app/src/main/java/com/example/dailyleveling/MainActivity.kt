@@ -1,19 +1,23 @@
 package com.example.dailyleveling
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Button
 import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.room.Room
+import com.example.dailyleveling.AddTask.AddTaskActivity
 import com.example.dailyleveling.MainScreen.ProgressAdapter
 import com.example.dailyleveling.MainScreen.TaskAdapter
 import com.example.dailyleveling.MainScreen.TaskItemVM
 import com.example.dailyleveling.database.AppDatabase
 import com.example.dailyleveling.database.Task
 import com.example.dailyleveling.database.TaskRepository
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 class MainActivity : AppCompatActivity() {
 
@@ -27,14 +31,15 @@ class MainActivity : AppCompatActivity() {
         supportActionBar?.hide()
 
         initialize()
-
         observeTasks()
+        addTask()
     }
 
     private fun initialize() {
         initializeViewModel()
         initializeRecyclerView()
         initializeProgressAdapter()
+
     }
     private fun initializeViewModel() {
         val database = Room.databaseBuilder(applicationContext, AppDatabase::class.java, "task_database")
@@ -58,7 +63,7 @@ class MainActivity : AppCompatActivity() {
     private fun observeTasks() {
         taskItemVM.allTasks.observe(this, Observer { tasks ->
             tasks?.let { it ->
-                tasks.takeIf { it.isNotEmpty() } ?: listOf(insertExampleTask())
+                tasks.takeIf { it.isNotEmpty() }?: listOf(insertExampleTask())
                 val totalTasks = it.size
                 val completedTasks = it.count { task -> task.status }
                 val progress = calculateProgress(totalTasks, completedTasks)
@@ -76,6 +81,13 @@ class MainActivity : AppCompatActivity() {
     }
     private fun updateProgressAdapter(progress: Int) {
         progressAdapter.setProgress(progress)
+    }
+    private fun addTask() {
+        val addButton = findViewById<FloatingActionButton>(R.id.add_button)
+        addButton.setOnClickListener {
+            val intent = Intent(this, AddTaskActivity::class.java)
+            startActivity(intent)
+        }
     }
     private fun insertExampleTask() {
         val task = Task(

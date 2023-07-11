@@ -12,4 +12,12 @@
     <string name="user_lvl_template">12 LVL</string>
     <string name="menu_b_description">Menu</string>
     <string name="account_button_description">Account</string>
+    <string name="category_button_text">Category</string>
+    <string name="confirm">Confirm</string>
+    <string name="cancel">Cancel</string>
+    <string name="todo">TODO</string>
+    <string name="button_value">Button Value</string>
+    <string name="button_description">Button Description</string>
+    <string name="button_title">Button Title</string>
+    <string name="title_activity_add_task">AddTaskActivity</string>
 </resources>

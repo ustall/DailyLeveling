@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+tools:context=".AddTask.AddTaskActivity">
+
+<TextView
+    android:id="@+id/title"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="start|center_vertical"
+    android:padding="16dp"
+    android:text="@string/title_task"
+    android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+    android:textSize="24sp"
+    android:textStyle="bold" />
+
+<EditText
+    android:id="@+id/task_text_edit"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_below="@id/title"
+    android:autofillHints="@string/task_text_hint"
+    android:background="@drawable/add_task_background"
+    android:hint="@string/task_text_hint"
+    android:inputType="text"
+    android:padding="16dp"
+    android:textSize="18sp"
+    android:layout_marginHorizontal="8dp"/>
+
+<androidx.recyclerview.widget.RecyclerView
+    android:id="@+id/task_list_recycler_view"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_below="@+id/task_text_edit"
+    android:layout_marginTop="10dp" />
+
+<LinearLayout
+    android:id="@+id/buttons_container"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_alignParentBottom="true"
+    android:orientation="horizontal"
+    android:outlineProvider="background">
+
+    <Button
+        android:id="@+id/cancel_button"
+        style="?android:attr/buttonBarButtonStyle"
+        android:layout_width="0dp"
+        android:layout_height="60dp"
+        android:layout_weight="1"
+        android:backgroundTint="?attr/colorSurface"
+        android:outlineProvider="none"
+        android:text="@string/cancel"
+        android:textColor="?attr/colorOnSurface"
+        app:cornerRadius="0dp" />
+
+    <Button
+        android:id="@+id/confirm_button"
+        style="?android:attr/buttonBarButtonStyle"
+        android:layout_width="0dp"
+        android:layout_height="60dp"
+        android:layout_weight="1"
+        android:backgroundTint="?attr/colorSurface"
+        android:foregroundGravity="bottom"
+        android:outlineProvider="none"
+        android:text="@string/confirm"
+        android:textColor="?attr/colorPrimary"
+        app:cornerRadius="0dp"
+        app:iconPadding="0dp" />
+
+</LinearLayout>
+</RelativeLayout>

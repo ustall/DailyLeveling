@@ -8,4 +8,5 @@
     <attr name="colorDiagramEnd" format="color" />
     <!-- -->
     <attr name="colorUncheckedMark" format="color" />
+
 </resources>

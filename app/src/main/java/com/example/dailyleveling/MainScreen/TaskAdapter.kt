@@ -36,14 +36,26 @@ class TaskAdapter(private val taskItemVM: TaskItemVM) : ListAdapter<Task, TaskAd
     inner class TaskViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val taskTitleTextView: TextView = itemView.findViewById(R.id.task_title)
         private val checkIcon: ImageView = itemView.findViewById(R.id.check_icon)
-        private  val cardView: CardView = itemView.findViewById(R.id.task_item_view)
-
+        private val context = itemView.context
+        private val uncheckedMarkColor = context.theme.obtainStyledAttributes(R.style.Theme_DailyLeveling, intArrayOf(R.attr.colorUncheckedMark)).getColor(0, 0)
+        private val onSurfaceColor = context.theme.obtainStyledAttributes(R.style.Theme_DailyLeveling, intArrayOf(com.google.android.material.R.attr.colorOnSurface)).getColor(0, 0)
+        private val primaryMarkColor = context.theme.obtainStyledAttributes(R.style.Theme_DailyLeveling, intArrayOf(com.google.android.material.R.attr.colorPrimary)).getColor(0, 0)
         init {
             itemView.setOnClickListener {
                 val position = adapterPosition
                 if (position != RecyclerView.NO_POSITION) {
                     val task = getItem(position)
                     taskItemVM.updateTaskStatus(task.id, !task.status)
+                    if (!task.status) {
+                        val animator = ValueAnimator.ofArgb(primaryMarkColor,uncheckedMarkColor)
+                        animator.duration = 1200
+                        animator.addUpdateListener { valueAnimator ->
+                            val color = valueAnimator.animatedValue as Int
+                            checkIcon.setColorFilter(color)
+                            taskTitleTextView.setTextColor(color)
+                        }
+                        animator.start()
+                    }
                 }
             }//короткое
             itemView.setOnLongClickListener {
@@ -53,21 +65,11 @@ class TaskAdapter(private val taskItemVM: TaskItemVM) : ListAdapter<Task, TaskAd
         }
         fun bind(task: Task) {
             taskTitleTextView.text = task.taskText
-            val context = itemView.context
-            val uncheckedMarkColor = context.theme.obtainStyledAttributes(R.style.Theme_DailyLeveling, intArrayOf(R.attr.colorUncheckedMark)).getColor(0, 0)
-            val onSurfaceColor = context.theme.obtainStyledAttributes(R.style.Theme_DailyLeveling, intArrayOf(com.google.android.material.R.attr.colorOnSurface)).getColor(0, 0)
-            val primaryMarkColor = context.theme.obtainStyledAttributes(R.style.Theme_DailyLeveling, intArrayOf(com.google.android.material.R.attr.colorPrimary)).getColor(0, 0)
             if (task.status) {
                 // Задача выполнена
                 checkIcon.setImageResource(R.drawable.baseline_checked_24)
-                val animator = ValueAnimator.ofArgb(primaryMarkColor,uncheckedMarkColor)
-                animator.duration = 1200
-                animator.addUpdateListener { valueAnimator ->
-                    val color = valueAnimator.animatedValue as Int
-                    checkIcon.setColorFilter(color)
-                    taskTitleTextView.setTextColor(color)
-                }
-                animator.start()
+                checkIcon.setColorFilter(uncheckedMarkColor)
+                taskTitleTextView.setTextColor(uncheckedMarkColor)
                 taskTitleTextView.paintFlags = Paint.STRIKE_THRU_TEXT_FLAG
             } else {
                 // Задача не выполнена
