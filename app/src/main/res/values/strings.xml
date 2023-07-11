@@ -20,4 +20,11 @@
     <string name="button_description">Button Description</string>
     <string name="button_title">Button Title</string>
     <string name="title_activity_add_task">AddTaskActivity</string>
+    <string name="type">Type</string>
+    <string name="type_of_task">Type of task</string>
+    <string name="default_value">Default</string>
+    <string name="default_value_n">1</string>
+    <string name="priority">Priority</string>
+    <string name="how_important_is_this_task_for_you">How important is this task for you?</string>
+
 </resources>
